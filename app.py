@@ -164,7 +164,7 @@ with st.expander("Case Study Notes", expanded=False):
     st.markdown("""
 **Key Insights:**
 
-- **Bags.fm enables OSS creators to launch memecoins** with built-in royalty mechanisms
+- **Bags.fm enables OSS creators or any community member to launch memecoins** with built-in royalty mechanisms
 - **Trading volume directly translates to creator funding** via royalties
 - **This model disrupts traditional grant/VC funding** for open source
 - **Network effects drive sustainable, perpetual revenue** for maintainers
