@@ -30,14 +30,6 @@ TOKENS = {
         "project_url": "https://github.com/nicholasgriffintn/ralph-does-things",
         "description": "Autonomous AI coding loops; royalties support open AI research and esoteric experiments."
     },
-    "TETSUO": {
-        "name": "Tetsuo Corp / solprivacy",
-        "creator": "Tetsuo AI",
-        "twitter": "https://x.com/tetsuoai",
-        "twitter_handle": "@tetsuoai",
-        "project_url": "https://tetsuo.ai",
-        "description": "Open-source Solana privacy tools and AI agents; funds hardware/robotics experiments."
-    },
     "GSD": {
         "name": "Get Shit Done",
         "creator": "Claude Code Community",
@@ -45,38 +37,6 @@ TOKENS = {
         "twitter_handle": "",
         "project_url": "https://github.com/anthropics/anthropic-cookbook",
         "description": "Vibe-coding automation tool; royalties provide risk-free OSS maintenance funding."
-    },
-    "TEXTUAL": {
-        "name": "Textual",
-        "creator": "Will McGugan",
-        "twitter": "https://x.com/willmcgugan",
-        "twitter_handle": "@willmcgugan",
-        "project_url": "https://github.com/Textualize/textual",
-        "description": "Python TUI framework; royalties support long-term maintenance of widely used OSS library."
-    },
-    "SOLPRIV": {
-        "name": "solprivacy",
-        "creator": "Tetsuo Corp",
-        "twitter": "https://x.com/tetsuoai",
-        "twitter_handle": "@tetsuoai",
-        "project_url": "https://tetsuo.ai",
-        "description": "AI-powered wallet privacy scanner; funds on-chain privacy tooling."
-    },
-    "FACTORY": {
-        "name": "Factory",
-        "creator": "Bags Ecosystem",
-        "twitter": "https://x.com/bags",
-        "twitter_handle": "@bags",
-        "project_url": "https://bags.fm",
-        "description": "Natural language to app prototyping platform; royalties accelerate full-stack AI builds."
-    },
-    "OSS": {
-        "name": "Meta OSS Funding",
-        "creator": "Community",
-        "twitter": "",
-        "twitter_handle": "",
-        "project_url": "",
-        "description": "Generic token directing royalties to open-source maintainers; meta-play on sustainable funding."
     }
 }
 
