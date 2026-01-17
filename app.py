@@ -37,7 +37,7 @@ TOKENS = {
         "twitter_handle": "",
         "project_url": "https://github.com/anthropics/anthropic-cookbook",
         "description": "Vibe-coding automation tool; royalties provide risk-free OSS maintenance funding.",
-        "pair_address": "3qwurggzrnibzcxjo5jw3oncw2fw9u9wdhepg2feavdc"
+        "pair_address": "dwudwjvan7bzkw9zwlbyv6kspdlvhwzrqy6ebk8xzxkv"
     }
 }
 
