@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 import time
 
 st.set_page_config(
-    page_title="Bags.fm Creator Memecoin Dashboard",
+    page_title="Realtime OSS Funding via Royalties",
     page_icon="💰",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -192,8 +192,8 @@ with st.sidebar:
 if refresh_interval:
     count = st_autorefresh(interval=refresh_interval, limit=None, key="data_refresh")
 
-st.title("Bags.fm Creator Memecoin Dashboard")
-st.markdown("### Realtime OSS Funding via Royalties")
+st.title("Realtime OSS Funding via Royalties")
+st.markdown("### Bags.fm Creator Memecoin Dashboard")
 st.markdown("""
 Visualizing how Bags.fm's royalty model turns speculative trading into sustainable funding 
 for vibe-coded open source and AI projects (as of Jan 2026).
