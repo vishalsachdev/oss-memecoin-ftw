@@ -28,7 +28,7 @@ TOKENS = {
         "creator": "Geoffrey Huntley",
         "social": "https://x.com/geoffreyhuntley",
         "social_handle": "@geoffreyhuntley",
-        "project_url": "https://github.com/nicholasgriffintn/ralph-does-things",
+        "project_url": "https://ralphcoin.org/",
         "bags_url": "https://bags.fm/CxWPdDBqxVo3fnTMRTvNuSrd4gkp78udSrFvkVDBAGS",
         "description": "Autonomous AI coding loops; royalties support open AI research and esoteric experiments."
     },
