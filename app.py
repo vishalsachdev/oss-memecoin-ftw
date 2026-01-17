@@ -35,8 +35,8 @@ TOKENS = {
     "GSD": {
         "name": "Get Shit Done",
         "creator": "Lex Christopherson",
-        "social": "https://www.youtube.com/@tachesteaches",
-        "social_handle": "@tachesteaches",
+        "social": "https://x.com/official_taches",
+        "social_handle": "@official_taches",
         "project_url": "https://github.com/glittercowboy/get-shit-done",
         "bags_url": "https://bags.fm/8116V1BW9zaXUM6pVhWVaAduKrLcEBi3RGXedKTrBAGS",
         "description": "Vibe-coding automation tool; royalties provide risk-free OSS maintenance funding.",
