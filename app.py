@@ -17,24 +17,24 @@ TOKENS = {
     "GAS": {
         "name": "Gastown",
         "creator": "Steve Yegge",
-        "twitter": "https://x.com/SteveYegge",
-        "twitter_handle": "@SteveYegge",
+        "social": "https://x.com/SteveYegge",
+        "social_handle": "@SteveYegge",
         "project_url": "https://github.com/steveyegge/gastown",
         "description": "Multi-agent AI orchestrator; royalties fund ongoing development of complex agent systems."
     },
     "RALPH": {
         "name": "Ralph Wiggum Technique",
         "creator": "Geoffrey Huntley",
-        "twitter": "https://x.com/geoffreyhuntley",
-        "twitter_handle": "@geoffreyhuntley",
+        "social": "https://x.com/geoffreyhuntley",
+        "social_handle": "@geoffreyhuntley",
         "project_url": "https://github.com/nicholasgriffintn/ralph-does-things",
         "description": "Autonomous AI coding loops; royalties support open AI research and esoteric experiments."
     },
     "GSD": {
         "name": "Get Shit Done",
-        "creator": "Claude Code Community",
-        "twitter": "",
-        "twitter_handle": "",
+        "creator": "Lex Christopherson",
+        "social": "https://www.youtube.com/@tachesteaches",
+        "social_handle": "@tachesteaches",
         "project_url": "https://github.com/glittercowboy/get-shit-done",
         "description": "Vibe-coding automation tool; royalties provide risk-free OSS maintenance funding.",
         "pair_address": "dwudwjvan7bzkw9zwlbyv6kspdlvhwzrqy6ebk8xzxkv"
@@ -197,8 +197,8 @@ with st.spinner("Fetching live data from DexScreener..."):
                 "ticker": f"${ticker}",
                 "name": info["name"],
                 "creator": info["creator"],
-                "twitter": info.get("twitter", ""),
-                "twitter_handle": info.get("twitter_handle", ""),
+                "social": info.get("social", ""),
+                "social_handle": info.get("social_handle", ""),
                 "project_url": info.get("project_url", ""),
                 "description": info["description"],
                 "price": float(pair.get("priceUsd", 0) or 0),
@@ -219,8 +219,8 @@ with st.spinner("Fetching live data from DexScreener..."):
                 "ticker": f"${ticker}",
                 "name": info["name"],
                 "creator": info["creator"],
-                "twitter": info.get("twitter", ""),
-                "twitter_handle": info.get("twitter_handle", ""),
+                "social": info.get("social", ""),
+                "social_handle": info.get("social_handle", ""),
                 "project_url": info.get("project_url", ""),
                 "description": info["description"],
                 "price": 0,
@@ -301,9 +301,9 @@ if len(df_filtered) > 0:
     display_df["6h"] = display_df["change_6h"].apply(format_change_colored)
     display_df["24h"] = display_df["change_24h"].apply(format_change_colored)
     
-    table_df = display_df[["ticker", "url", "name", "project_url", "creator", "twitter", "Price", "FDV/MC", "24h Volume", 
+    table_df = display_df[["ticker", "url", "name", "project_url", "creator", "social", "Price", "FDV/MC", "24h Volume", 
                             "Liquidity", "5m", "1h", "6h", "24h", "pair_age", "Status"]].copy()
-    table_df.columns = ["Ticker", "DexScreener", "Project Name", "Project", "Creator", "Twitter", "Price", "FDV/MC", "24h Volume", 
+    table_df.columns = ["Ticker", "DexScreener", "Project Name", "Project", "Creator", "Social", "Price", "FDV/MC", "24h Volume", 
                         "Liquidity", "5m", "1h", "6h", "24h", "Pair Age", "Status"]
     
     st.caption("Select tokens to compare in charts below:")
@@ -327,7 +327,7 @@ if len(df_filtered) > 0:
             "Project Name": st.column_config.TextColumn("Project Name", width="medium"),
             "Project": st.column_config.LinkColumn("Project", display_text="View", width="small"),
             "Creator": st.column_config.TextColumn("Creator", width="small"),
-            "Twitter": st.column_config.LinkColumn("Twitter", display_text="View", width="small"),
+            "Social": st.column_config.LinkColumn("Social", display_text="View", width="small"),
             "Price": st.column_config.TextColumn("Price", width="small"),
             "FDV/MC": st.column_config.TextColumn("FDV/MC", width="small"),
             "24h Volume": st.column_config.TextColumn("24h Volume", width="small"),
