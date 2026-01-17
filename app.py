@@ -17,8 +17,8 @@ TOKENS = {
     "GAS": {
         "name": "Gastown",
         "creator": "Steve Yegge",
-        "social": "https://x.com/SteveYegge",
-        "social_handle": "@SteveYegge",
+        "social": "https://x.com/Steve_Yegge",
+        "social_handle": "@Steve_Yegge",
         "project_url": "https://github.com/steveyegge/gastown",
         "bags_url": "https://bags.fm/7pskt3A1Zsjhngazam7vHWjWHnfgiRump916Xj7ABAGS",
         "description": "Multi-agent AI orchestrator; royalties fund ongoing development of complex agent systems."
