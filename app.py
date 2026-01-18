@@ -358,10 +358,10 @@ if len(df_filtered) > 0:
     display_df["6h"] = display_df["change_6h"].apply(format_change_colored)
     display_df["24h"] = display_df["change_24h"].apply(format_change_colored)
     
-    table_df = display_df[["ticker", "url", "name", "project_url", "creator", "social", "bags_url", "Earnings (USD)", "Earnings (SOL)", "Price", "FDV/MC", "24h Volume", 
-                            "Liquidity", "5m", "1h", "6h", "24h", "pair_age", "Status"]].copy()
-    table_df.columns = ["Ticker", "DexScreener", "Project Name", "Project", "Creator", "Social", "Bags.fm", "Earnings (USD)", "Earnings (SOL)", "Price", "FDV/MC", "24h Volume", 
-                        "Liquidity", "5m", "1h", "6h", "24h", "Pair Age", "Status"]
+    table_df = display_df[["ticker", "name", "project_url", "creator", "social", "bags_url", "Earnings (USD)", "Earnings (SOL)", "pair_age", "Price", "FDV/MC", "24h Volume", 
+                            "Liquidity", "url", "5m", "1h", "6h", "24h", "Status"]].copy()
+    table_df.columns = ["Ticker", "Project Name", "Project", "Creator", "Social", "Bags.fm", "Earnings (USD)", "Earnings (SOL)", "Days from Launch", "Price", "FDV/MC", "24h Volume", 
+                        "Liquidity", "DexScreener", "5m", "1h", "6h", "24h", "Status"]
     
     st.dataframe(
         table_df,
@@ -369,7 +369,6 @@ if len(df_filtered) > 0:
         hide_index=True,
         column_config={
             "Ticker": st.column_config.TextColumn("Ticker", width="small"),
-            "DexScreener": st.column_config.LinkColumn("DexScreener", display_text="View", width="small"),
             "Project Name": st.column_config.TextColumn("Project Name", width="medium"),
             "Project": st.column_config.LinkColumn("Project", display_text="View", width="small"),
             "Creator": st.column_config.TextColumn("Creator", width="small"),
@@ -377,15 +376,16 @@ if len(df_filtered) > 0:
             "Bags.fm": st.column_config.LinkColumn("Bags.fm", display_text="View", width="small"),
             "Earnings (USD)": st.column_config.TextColumn("Earnings (USD)", width="small"),
             "Earnings (SOL)": st.column_config.TextColumn("Earnings (SOL)", width="small"),
+            "Days from Launch": st.column_config.TextColumn("Days from Launch", width="small"),
             "Price": st.column_config.TextColumn("Price", width="small"),
             "FDV/MC": st.column_config.TextColumn("FDV/MC", width="small"),
             "24h Volume": st.column_config.TextColumn("24h Volume", width="small"),
             "Liquidity": st.column_config.TextColumn("Liquidity", width="small"),
+            "DexScreener": st.column_config.LinkColumn("DexScreener", display_text="View", width="small"),
             "5m": st.column_config.TextColumn("5m", width="small"),
             "1h": st.column_config.TextColumn("1h", width="small"),
             "6h": st.column_config.TextColumn("6h", width="small"),
             "24h": st.column_config.TextColumn("24h", width="small"),
-            "Pair Age": st.column_config.TextColumn("Pair Age", width="small"),
             "Status": st.column_config.TextColumn("Status", width="small"),
         }
     )
