@@ -26,7 +26,8 @@ TOKENS = {
         "project_url": "https://github.com/steveyegge/gastown",
         "bags_url": "https://bags.fm/7pskt3A1Zsjhngazam7vHWjWHnfgiRump916Xj7ABAGS",
         "token_mint": "7pskt3A1Zsjhngazam7vHWjWHnfgiRump916Xj7ABAGS",
-        "description": "Multi-agent AI orchestrator; royalties fund ongoing development of complex agent systems."
+        "description": "Multi-agent AI orchestrator; royalties fund ongoing development of complex agent systems.",
+        "pair_address": "finu5nsfwvjqbafdesxdxvlhqja3h7qybrluqfrb27v9"
     },
     "RALPH": {
         "name": "Ralph Wiggum Technique",
