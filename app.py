@@ -53,6 +53,17 @@ TOKENS = {
 }
 
 @st.cache_data(ttl=60)
+def fetch_sol_price():
+    try:
+        url = "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd"
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        return data.get("solana", {}).get("usd", 0)
+    except Exception:
+        return 0
+
+@st.cache_data(ttl=60)
 def fetch_bags_earnings(token_mint):
     if not BAGS_API_KEY or not token_mint:
         return None
@@ -218,6 +229,7 @@ all_tokens = {**TOKENS, **st.session_state.get("custom_tickers", {})}
 
 with st.spinner("Fetching live data from DexScreener..."):
     token_data = []
+    sol_price = fetch_sol_price()
     
     for ticker, info in all_tokens.items():
         pair_address = info.get("pair_address")
@@ -226,6 +238,7 @@ with st.spinner("Fetching live data from DexScreener..."):
         bags_url = info.get("bags_url", "")
         token_mint = info.get("token_mint", "")
         earnings = fetch_bags_earnings(token_mint) if token_mint else None
+        earnings_usd = earnings * sol_price if earnings and sol_price else 0
         
         if pair:
             price_changes = pair.get("priceChange", {})
@@ -238,6 +251,7 @@ with st.spinner("Fetching live data from DexScreener..."):
                 "project_url": info.get("project_url", ""),
                 "bags_url": bags_url,
                 "earnings": earnings if earnings else 0,
+                "earnings_usd": earnings_usd,
                 "description": info["description"],
                 "price": float(pair.get("priceUsd", 0) or 0),
                 "fdv": float(pair.get("fdv", 0) or 0),
@@ -262,6 +276,7 @@ with st.spinner("Fetching live data from DexScreener..."):
                 "project_url": info.get("project_url", ""),
                 "bags_url": bags_url,
                 "earnings": earnings if earnings else 0,
+                "earnings_usd": earnings_usd,
                 "description": info["description"],
                 "price": 0,
                 "fdv": 0,
@@ -329,7 +344,8 @@ if len(df_filtered) > 0:
     display_df["24h Volume"] = display_df["volume_24h"].apply(lambda x: format_number(x))
     display_df["Liquidity"] = display_df["liquidity"].apply(lambda x: format_number(x))
     display_df["Status"] = display_df["active"].apply(lambda x: "Active" if x else "Inactive/No Data")
-    display_df["Earnings"] = display_df["earnings"].apply(lambda x: f"{x:,.2f} SOL" if x and x > 0 else "N/A")
+    display_df["Earnings (USD)"] = display_df["earnings_usd"].apply(lambda x: f"${x:,.0f}" if x and x > 0 else "N/A")
+    display_df["Earnings (SOL)"] = display_df["earnings"].apply(lambda x: f"{x:,.2f} SOL" if x and x > 0 else "N/A")
     
     def format_change_colored(change):
         if change is None or change == 0:
@@ -342,9 +358,9 @@ if len(df_filtered) > 0:
     display_df["6h"] = display_df["change_6h"].apply(format_change_colored)
     display_df["24h"] = display_df["change_24h"].apply(format_change_colored)
     
-    table_df = display_df[["ticker", "url", "name", "project_url", "creator", "social", "bags_url", "Earnings", "Price", "FDV/MC", "24h Volume", 
+    table_df = display_df[["ticker", "url", "name", "project_url", "creator", "social", "bags_url", "Earnings (USD)", "Earnings (SOL)", "Price", "FDV/MC", "24h Volume", 
                             "Liquidity", "5m", "1h", "6h", "24h", "pair_age", "Status"]].copy()
-    table_df.columns = ["Ticker", "DexScreener", "Project Name", "Project", "Creator", "Social", "Bags.fm", "Earnings", "Price", "FDV/MC", "24h Volume", 
+    table_df.columns = ["Ticker", "DexScreener", "Project Name", "Project", "Creator", "Social", "Bags.fm", "Earnings (USD)", "Earnings (SOL)", "Price", "FDV/MC", "24h Volume", 
                         "Liquidity", "5m", "1h", "6h", "24h", "Pair Age", "Status"]
     
     st.caption("Select tokens to compare in charts below:")
@@ -370,7 +386,8 @@ if len(df_filtered) > 0:
             "Creator": st.column_config.TextColumn("Creator", width="small"),
             "Social": st.column_config.LinkColumn("Social", display_text="View", width="small"),
             "Bags.fm": st.column_config.LinkColumn("Bags.fm", display_text="View", width="small"),
-            "Earnings": st.column_config.TextColumn("Earnings", width="small"),
+            "Earnings (USD)": st.column_config.TextColumn("Earnings (USD)", width="small"),
+            "Earnings (SOL)": st.column_config.TextColumn("Earnings (SOL)", width="small"),
             "Price": st.column_config.TextColumn("Price", width="small"),
             "FDV/MC": st.column_config.TextColumn("FDV/MC", width="small"),
             "24h Volume": st.column_config.TextColumn("24h Volume", width="small"),
