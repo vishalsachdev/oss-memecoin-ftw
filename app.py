@@ -50,16 +50,6 @@ TOKENS = {
         "description": "Vibe-coding automation tool; royalties provide risk-free OSS maintenance funding.",
         "pair_address": "dwudwjvan7bzkw9zwlbyv6kspdlvhwzrqy6ebk8xzxkv"
     },
-    "CLAUDEFLOW": {
-        "name": "ClaudeFlow",
-        "creator": "Reuven Cohen",
-        "social": "https://www.linkedin.com/in/reuvencohen/",
-        "social_handle": "LinkedIn",
-        "project_url": "https://github.com/ruvnet",
-        "bags_url": "https://bags.fm/AZnYQZUV7UfyxvkhTTgakUtd8J5nvGYtTzmKpkFcBAGS",
-        "token_mint": "AZnYQZUV7UfyxvkhTTgakUtd8J5nvGYtTzmKpkFcBAGS",
-        "description": "Agent orchestration platform for Claude; multi-agent swarms and autonomous workflows."
-    },
     "LEON": {
         "name": "LEON AI",
         "creator": "Gren Louis",
