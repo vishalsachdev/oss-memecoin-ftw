@@ -390,6 +390,9 @@ if len(df_filtered) > 0:
         }
     )
     
+    total_earnings_usd = display_df["earnings_usd"].sum()
+    st.markdown(f"**Total Earnings: ${total_earnings_usd:,.0f}**")
+    
     st.markdown("**Price Change Legend:** Green = positive, Red = negative")
     change_cols = st.columns(8)
     for i, (_, row) in enumerate(display_df.iterrows()):
