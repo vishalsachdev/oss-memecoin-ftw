@@ -363,17 +363,6 @@ if len(df_filtered) > 0:
     table_df.columns = ["Ticker", "DexScreener", "Project Name", "Project", "Creator", "Social", "Bags.fm", "Earnings (USD)", "Earnings (SOL)", "Price", "FDV/MC", "24h Volume", 
                         "Liquidity", "5m", "1h", "6h", "24h", "Pair Age", "Status"]
     
-    st.caption("Select tokens to compare in charts below:")
-    
-    token_options = display_df["ticker"].tolist()
-    selected = st.multiselect(
-        "Select tokens for chart comparison",
-        options=token_options,
-        default=token_options[:3] if len(token_options) >= 3 else token_options,
-        key="token_selector"
-    )
-    st.session_state.selected_tokens = selected
-    
     st.dataframe(
         table_df,
         use_container_width=True,
@@ -421,85 +410,6 @@ if len(df_filtered) > 0:
 else:
     st.warning("No tokens match the current filter criteria.")
 
-st.markdown("---")
-st.subheader("Volume Analysis")
-
-selected_tokens = st.session_state.get("selected_tokens", [])
-if selected_tokens:
-    chart_df = active_df[(active_df["volume_24h"] > 0) & (active_df["ticker"].isin(selected_tokens))].copy()
-else:
-    chart_df = active_df[active_df["volume_24h"] > 0].copy()
-
-if len(chart_df) > 0:
-    chart_cols = st.columns(2)
-    
-    with chart_cols[0]:
-        st.markdown("##### 24h Volume Comparison")
-        bar_df = chart_df.sort_values("volume_24h", ascending=True)
-        fig_bar = px.bar(
-            bar_df,
-            y="ticker",
-            x="volume_24h",
-            orientation="h",
-            labels={"volume_24h": "24h Volume (USD)", "ticker": "Token"},
-            color="volume_24h",
-            color_continuous_scale="Viridis"
-        )
-        fig_bar.update_layout(
-            showlegend=False,
-            height=400,
-            margin=dict(l=0, r=0, t=20, b=0),
-            coloraxis_showscale=False
-        )
-        fig_bar.update_traces(
-            hovertemplate="<b>%{y}</b><br>Volume: $%{x:,.0f}<extra></extra>"
-        )
-        st.plotly_chart(fig_bar, use_container_width=True)
-    
-    with chart_cols[1]:
-        st.markdown("##### Volume Distribution")
-        fig_pie = px.pie(
-            chart_df,
-            values="volume_24h",
-            names="ticker",
-            hole=0.4
-        )
-        fig_pie.update_layout(
-            height=400,
-            margin=dict(l=0, r=0, t=20, b=0),
-            showlegend=True,
-            legend=dict(orientation="h", yanchor="bottom", y=-0.2)
-        )
-        fig_pie.update_traces(
-            textposition="inside",
-            textinfo="percent+label",
-            hovertemplate="<b>%{label}</b><br>Volume: $%{value:,.0f}<br>Share: %{percent}<extra></extra>"
-        )
-        st.plotly_chart(fig_pie, use_container_width=True)
-    
-    st.markdown("##### 24h Price Change Overview")
-    change_df = chart_df.sort_values("change_24h", ascending=True)
-    colors = ["#ef4444" if x < 0 else "#22c55e" for x in change_df["change_24h"]]
-    
-    fig_change = px.bar(
-        change_df,
-        y="ticker",
-        x="change_24h",
-        orientation="h",
-        labels={"change_24h": "24h Change (%)", "ticker": "Token"}
-    )
-    fig_change.update_traces(
-        marker_color=colors,
-        hovertemplate="<b>%{y}</b><br>Change: %{x:.2f}%<extra></extra>"
-    )
-    fig_change.update_layout(
-        height=300,
-        margin=dict(l=0, r=0, t=20, b=0),
-        xaxis=dict(zeroline=True, zerolinewidth=2, zerolinecolor="gray")
-    )
-    st.plotly_chart(fig_change, use_container_width=True)
-else:
-    st.info("No active tokens with volume data to display charts.")
 
 st.markdown("---")
 st.caption("""
