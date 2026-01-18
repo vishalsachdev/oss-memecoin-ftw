@@ -13,6 +13,10 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+import os
+
+BAGS_API_KEY = os.environ.get("BAGS_API_KEY", "")
+
 TOKENS = {
     "GAS": {
         "name": "Gastown",
@@ -21,6 +25,7 @@ TOKENS = {
         "social_handle": "@Steve_Yegge",
         "project_url": "https://github.com/steveyegge/gastown",
         "bags_url": "https://bags.fm/7pskt3A1Zsjhngazam7vHWjWHnfgiRump916Xj7ABAGS",
+        "token_mint": "7pskt3A1Zsjhngazam7vHWjWHnfgiRump916Xj7ABAGS",
         "description": "Multi-agent AI orchestrator; royalties fund ongoing development of complex agent systems."
     },
     "RALPH": {
@@ -30,6 +35,7 @@ TOKENS = {
         "social_handle": "@geoffreyhuntley",
         "project_url": "https://ralphcoin.org/",
         "bags_url": "https://bags.fm/CxWPdDBqxVo3fnTMRTvNuSrd4gkp78udSrFvkVDBAGS",
+        "token_mint": "CxWPdDBqxVo3fnTMRTvNuSrd4gkp78udSrFvkVDBAGS",
         "description": "Autonomous AI coding loops; royalties support open AI research and esoteric experiments."
     },
     "GSD": {
@@ -39,30 +45,26 @@ TOKENS = {
         "social_handle": "@official_taches",
         "project_url": "https://github.com/glittercowboy/get-shit-done",
         "bags_url": "https://bags.fm/8116V1BW9zaXUM6pVhWVaAduKrLcEBi3RGXedKTrBAGS",
+        "token_mint": "8116V1BW9zaXUM6pVhWVaAduKrLcEBi3RGXedKTrBAGS",
         "description": "Vibe-coding automation tool; royalties provide risk-free OSS maintenance funding.",
         "pair_address": "dwudwjvan7bzkw9zwlbyv6kspdlvhwzrqy6ebk8xzxkv"
     }
 }
 
-import re
-
 @st.cache_data(ttl=60)
-def fetch_bags_earnings(bags_url):
+def fetch_bags_earnings(token_mint):
+    if not BAGS_API_KEY or not token_mint:
+        return None
     try:
-        response = requests.get(bags_url, timeout=10)
+        url = f"https://public-api-v2.bags.fm/api/v1/token-launch/lifetime-fees?tokenMint={token_mint}"
+        headers = {"x-api-key": BAGS_API_KEY}
+        response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
-        content = response.text
+        data = response.json()
         
-        match = re.search(r'earnings\s*\$\s*([\d,]+\.?\d*)', content, re.IGNORECASE)
-        if match:
-            earnings_str = match.group(1).replace(',', '')
-            return float(earnings_str)
-        
-        match = re.search(r'\$\s*([\d,]+\.?\d*)\s*(?:earnings|earned)', content, re.IGNORECASE)
-        if match:
-            earnings_str = match.group(1).replace(',', '')
-            return float(earnings_str)
-        
+        if data.get("success") and data.get("data"):
+            total_fees = data["data"].get("totalFeesUsd", 0)
+            return float(total_fees) if total_fees else 0
         return None
     except Exception as e:
         return None
@@ -218,7 +220,8 @@ with st.spinner("Fetching live data from DexScreener..."):
         pair = fetch_dexscreener_data(ticker, pair_address)
         
         bags_url = info.get("bags_url", "")
-        earnings = fetch_bags_earnings(bags_url) if bags_url else None
+        token_mint = info.get("token_mint", "")
+        earnings = fetch_bags_earnings(token_mint) if token_mint else None
         
         if pair:
             price_changes = pair.get("priceChange", {})
