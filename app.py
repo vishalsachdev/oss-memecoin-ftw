@@ -203,7 +203,7 @@ Visualizing how Bags.fm's royalty model turns speculative trading into sustainab
 for vibe-coded open source and AI projects (as of Jan 2026).
 """)
 
-with st.expander("Case Study Notes", expanded=False):
+with st.expander("Notes", expanded=False):
     st.markdown("""
 **Key Insights:**
 
