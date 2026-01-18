@@ -63,9 +63,12 @@ def fetch_bags_earnings(token_mint):
         response.raise_for_status()
         data = response.json()
         
-        if data.get("success") and data.get("data"):
-            total_fees = data["data"].get("totalFeesUsd", 0)
-            return float(total_fees) if total_fees else 0
+        if data.get("success"):
+            raw_value = data.get("response", 0)
+            if raw_value:
+                lamports = float(raw_value)
+                sol_value = lamports / 1_000_000_000
+                return sol_value
         return None
     except Exception as e:
         return None
@@ -326,7 +329,7 @@ if len(df_filtered) > 0:
     display_df["24h Volume"] = display_df["volume_24h"].apply(lambda x: format_number(x))
     display_df["Liquidity"] = display_df["liquidity"].apply(lambda x: format_number(x))
     display_df["Status"] = display_df["active"].apply(lambda x: "Active" if x else "Inactive/No Data")
-    display_df["Earnings"] = display_df["earnings"].apply(lambda x: format_number(x) if x > 0 else "N/A")
+    display_df["Earnings"] = display_df["earnings"].apply(lambda x: f"{x:,.2f} SOL" if x and x > 0 else "N/A")
     
     def format_change_colored(change):
         if change is None or change == 0:
