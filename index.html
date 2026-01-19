@@ -717,11 +717,6 @@
             arrow.textContent = content.classList.contains('show') ? '▲' : '▼';
         }
 
-        // Auto-refresh every 5 minutes
-        setInterval(() => {
-            loadData();
-        }, 5 * 60 * 1000);
-
         loadData();
     </script>
 </body>
