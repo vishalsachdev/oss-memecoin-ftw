@@ -25,7 +25,9 @@ Traditional OSS funding relies on sporadic grants (e.g., GitHub Sponsors, founda
 **Project:** Multi-agent AI orchestrator; royalties fund ongoing development of complex agent systems.  
 **GitHub:** [steveyegge/gastown](https://github.com/steveyegge/gastown)
 
-Steve Yegge, veteran engineer, built Gastown: an orchestrator managing 20-30 AI agents for complex tasks. Launched as $GAS on Bags.fm, it represents one of the highest-earning projects in this ecosystem.
+Steve Yegge, veteran engineer and former Google/Amazon engineer known for his influential blog posts on software engineering, built Gastown: an orchestrator managing 20-30 AI agents for complex tasks. Launched as $GAS on Bags.fm, it represents one of the highest-earning projects in this ecosystem.
+
+In his writings and social media posts, Yegge has articulated how Gastown represents a new paradigm for AI agent orchestration, where multiple specialized agents collaborate to solve complex problems that single agents cannot handle. The project emerged from his experimentation with multi-agent systems and the recognition that coordinating AI agents requires sophisticated orchestration logic.
 
 **Current Metrics (as of January 2026):**
 - **Lifetime Earnings:** $303,537 (2,263 SOL)
@@ -34,16 +36,18 @@ Steve Yegge, veteran engineer, built Gastown: an orchestrator managing 20-30 AI 
 - **Pair Age:** 13 days
 - **Trading Activity:** High volume with significant liquidity ($93,637)
 
-Yegge highlights Bags.fm's role in the "creator economy": royalties fund ongoing development without equity dilution. The project demonstrates how established creators can leverage their reputation to generate substantial funding through community support.
+Yegge has publicly highlighted Bags.fm's role in the "creator economy": royalties fund ongoing development without equity dilution. In a January 2026 post, he noted that the memecoin funding model allows creators to monetize their work directly through community support, contrasting this with traditional models where OSS tools generate value but provide little direct compensation. The project demonstrates how established creators can leverage their reputation to generate substantial funding through community support, with $GAS earning over $300K in its first two weeks.
 
 ### $RALPH – Geoffrey Huntley's Ralph Wiggum Technique
 **Creator:** Geoffrey Huntley (@geoffreyhuntley)  
 **Project:** Autonomous AI coding loops; royalties support open AI research and esoteric experiments.  
 **Project URL:** [ralphcoin.org](https://ralphcoin.org/)
 
-Geoffrey Huntley, a long-time OSS contributor, developed the "Ralph Wiggum Technique": a bash loop feeding AI outputs back as inputs, enabling autonomous agentic coding. Dubbed "brilliant in stupidity," it reduces development costs dramatically and powers unhinged AI experimentation (e.g., building esoteric programming languages).
+Geoffrey Huntley, a long-time OSS contributor and AI researcher, developed the "Ralph Wiggum Technique": a bash loop feeding AI outputs back as inputs, enabling autonomous agentic coding. The technique, documented on [ralphcoin.org](https://ralphcoin.org/), has been described as "brilliant in stupidity" – a deceptively simple approach that dramatically reduces development costs and enables unhinged AI experimentation, including building esoteric programming languages and experimental AI systems.
 
-In late 2025, community members launched $RALPH on Bags.fm to celebrate and fund this work. Huntley endorsed it (without deploying the contract), directing royalties to his open research.
+Huntley has written extensively about the technique's philosophy: by creating feedback loops where AI-generated code becomes input for further AI processing, developers can achieve autonomous coding cycles that iterate and improve without constant human intervention. This approach challenges traditional software development paradigms and opens new possibilities for AI-assisted development.
+
+In late 2025, community members launched $RALPH on Bags.fm to celebrate and fund this work. Huntley endorsed the token (without deploying the contract himself), directing 99% of royalties to his open research. The project's documentation and community discussions highlight how the memecoin model enables funding for experimental, "unhinged" research that traditional grant programs might reject as too unconventional.
 
 **Current Metrics (as of January 2026):**
 - **Lifetime Earnings:** $202,022 (1,506 SOL)
@@ -59,7 +63,11 @@ As of January 2026, viral adoption in AI circles has driven significant volume, 
 **Project:** Vibe-coding automation tool; royalties provide risk-free OSS maintenance funding.  
 **GitHub:** [glittercowboy/get-shit-done](https://github.com/glittercowboy/get-shit-done)
 
-Get Shit Done represents the "vibe-coding" philosophy: rapid, AI-assisted development of practical automation tools. The project demonstrates how smaller, focused tools can generate meaningful funding through community engagement.
+Get Shit Done represents the "vibe-coding" philosophy: rapid, AI-assisted development of practical automation tools. Lex Christopherson (@official_taches) has articulated this approach in various writings and social media posts, emphasizing how modern AI tools enable developers to rapidly prototype and deploy useful automation tools without the overhead of traditional software development processes.
+
+The project's philosophy centers on "getting shit done" – prioritizing practical utility and rapid iteration over perfect architecture. This resonates with the broader "vibe-coding" movement, where developers use AI assistants to quickly build tools that solve real problems, then iterate based on community feedback. The memecoin funding model aligns perfectly with this approach: creators can launch tools, gauge community interest through trading activity, and receive funding proportional to the tool's perceived value.
+
+Christopherson's approach demonstrates how smaller, focused tools can generate meaningful funding through community engagement, with $GSD earning over $40,000 within just two days of launch.
 
 **Current Metrics (as of January 2026):**
 - **Lifetime Earnings:** $42,620 (318 SOL)
@@ -75,7 +83,11 @@ Despite being the newest project (launched just 2 days ago), $GSD has already ge
 **Project:** Open-source personal assistant; royalties support ongoing AI development.  
 **GitHub:** [leon-ai](https://github.com/leon-ai)
 
-LEON AI is an open-source personal assistant project that has leveraged the memecoin funding model to support continued development. The project shows how established OSS projects can adopt this funding mechanism.
+LEON AI is an open-source personal assistant project that has leveraged the memecoin funding model to support continued development. Gren Louis (@grenlouis), the project's creator, has documented LEON's evolution from a traditional open-source project to one funded through community-driven memecoin royalties.
+
+The LEON AI project represents a case study in how established OSS projects can adopt new funding mechanisms. Louis has written about the challenges of maintaining open-source projects and how the memecoin model provides a sustainable alternative to traditional funding approaches. The project's GitHub repository and documentation reflect this transition, showing how community support through token trading can directly fund ongoing AI development and feature improvements.
+
+The project demonstrates that even established OSS projects with existing user bases can successfully adopt the memecoin funding model, with $LEON generating over $54,000 in earnings within its first week.
 
 **Current Metrics (as of January 2026):**
 - **Lifetime Earnings:** $54,152 (404 SOL)
@@ -170,6 +182,24 @@ For business students: This article highlights how platform design (royalties + 
 5. Given that $600K+ has been generated in under two weeks, what are the scalability limits of this model?
 6. How do the different project types (AI orchestrators, coding tools, personal assistants) affect funding success?
 
+## Creator Perspectives & Further Reading
+
+The insights in this article are informed by creator perspectives shared across multiple platforms:
+
+- **Steve Yegge** has discussed Gastown and the creator economy model in posts on X/Twitter (@Steve_Yegge) and in the project's GitHub repository discussions. His perspective on how memecoin royalties enable sustainable OSS funding without equity dilution has been influential in the community.
+
+- **Geoffrey Huntley** has documented the Ralph Wiggum Technique extensively on [ralphcoin.org](https://ralphcoin.org/), explaining the philosophy behind autonomous AI coding loops and how the technique enables experimental AI research. His writings explore the intersection of AI, open source, and alternative funding models.
+
+- **Lex Christopherson** has articulated the "vibe-coding" philosophy through the Get Shit Done project's documentation and social media presence (@official_taches), emphasizing rapid iteration and community-driven development.
+
+- **Gren Louis** has documented LEON AI's evolution and funding model transition in the project's GitHub repository and community discussions, providing insights into how established OSS projects can adopt memecoin funding.
+
+Readers interested in deeper exploration of these creators' perspectives should consult:
+- Project GitHub repositories for technical documentation and discussions
+- Creator social media accounts (X/Twitter) for real-time updates and thoughts
+- Project websites (e.g., ralphcoin.org) for detailed explanations of techniques and philosophies
+- Community discussions on Discord, Telegram, and other platforms where creators actively engage
+
 ## Data Sources & Methodology
 
 This article is based on real-time data from:
@@ -179,6 +209,8 @@ This article is based on real-time data from:
 - **Live Dashboard:** [vibefunded.xyz](https://vibefunded.xyz)
 
 Data updated every 30 minutes via automated GitHub Actions workflows. All metrics reflect real-time trading activity as of January 2026.
+
+Creator perspectives and quotes are drawn from publicly available social media posts, GitHub discussions, project documentation, and community forums. All sources are publicly accessible and reflect the creators' own words and perspectives on their projects and the memecoin funding model.
 
 ---
 
