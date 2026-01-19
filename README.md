@@ -1,136 +1,68 @@
-# OSS Funding Dashboard - GitHub Deployment Guide
+# VibeFunded
 
-A static dashboard that displays real-time OSS funding data from Bags.fm, automatically updated every 30 minutes via GitHub Actions.
+**Realtime OSS Funding via Royalties**
 
-## Setup Instructions
+A live dashboard tracking how Bags.fm's royalty model turns speculative trading into sustainable funding for open source and AI projects.
 
-### 1. Create a New GitHub Repository
+🌐 **Live at:** [vibefunded.xyz](https://vibefunded.xyz)
 
-1. Go to GitHub and create a new repository
-2. Clone it locally or use GitHub's web interface
+## About
 
-### 2. Copy These Files
+VibeFunded visualizes a new funding model for open source software: creator memecoins with built-in royalty mechanisms. Instead of relying on grants, donations, or venture capital, OSS creators can launch tokens where trading volume directly funds ongoing development.
 
-Copy the following files/folders to your repository:
-```
-.github/
-  workflows/
-    update-data.yml
-scripts/
-  fetch_data.py
-public/
-  index.html
-```
+This dashboard tracks real-time metrics for OSS projects that have launched memecoins on Bags.fm, showing:
 
-### 3. Add Your API Key as a Secret
+- **Total earnings** from trading royalties
+- **Market metrics** (price, volume, liquidity)
+- **Price changes** across multiple timeframes
+- **Project information** and links to creator socials
 
-1. Go to your repository on GitHub
-2. Click **Settings** > **Secrets and variables** > **Actions**
-3. Click **New repository secret**
-4. Name: `BAGS_API_KEY`
-5. Value: Your Bags.fm API key
-6. Click **Add secret**
+## The Model
 
-### 4. Enable GitHub Pages
+**How it works:**
+1. OSS creators launch memecoins on Bags.fm
+2. Each trade generates royalties that go to the creator
+3. Trading volume directly translates to project funding
+4. Network effects drive sustainable, perpetual revenue
 
-1. Go to **Settings** > **Pages**
-2. Under "Source", select **Deploy from a branch**
-3. Select **main** branch and **/public** folder
-4. Click **Save**
+**Why it matters:**
+- **Disrupts traditional funding** - No grant applications or VC pitches
+- **Community-driven** - Funding scales with project popularity
+- **Risk-free for creators** - Royalties provide ongoing maintenance funding
+- **Transparent** - All earnings are visible on-chain
 
-### 5. Run the Workflow Manually (First Time)
+## Featured Projects
 
-1. Go to **Actions** tab
-2. Click **Update Token Data** workflow
-3. Click **Run workflow** > **Run workflow**
-4. Wait for it to complete - this creates the initial `data.json`
+The dashboard currently tracks:
 
-### 6. Configure Custom Domain (Optional)
+- **Gastown** ($GAS) - Multi-agent AI orchestrator by Steve Yegge
+- **Ralph Wiggum Technique** ($RALPH) - Autonomous AI coding loops by Geoffrey Huntley
+- **Get Shit Done** ($GSD) - Vibe-coding automation tool by Lex Christopherson
+- **LEON AI** ($LEON) - Open-source personal assistant by Gren Louis
 
-If you have a custom domain (e.g., `vibefunded.xyz`):
+## Data Sources
 
-1. The `public/CNAME` file is already configured with your domain
-2. In GitHub, go to **Settings** > **Pages**
-3. Under "Custom domain", enter your domain: `vibefunded.xyz`
-4. Check "Enforce HTTPS" (after DNS propagates)
+- **DexScreener API** - Real-time token price, volume, and market data
+- **Bags.fm API** - Lifetime earnings and royalty data
+- **CoinGecko API** - SOL price for USD conversions
 
-**DNS Configuration on Porkbun:**
-- Go to your Porkbun domain management
-- Add DNS records:
-  - **Type:** `CNAME` or `ALIAS`
-  - **Name:** `@` (or leave blank for root domain)
-  - **Value:** `vishalsachdev.github.io`
-  - **TTL:** 600 (or default)
+Data updates automatically every 30 minutes via GitHub Actions.
 
-**Note:** DNS propagation can take 5 minutes to 48 hours. Once propagated, GitHub will automatically enable HTTPS.
+## Technology
 
-### 7. Access Your Dashboard
+- **Frontend:** Static HTML/CSS/JavaScript dashboard
+- **Backend:** Python script with GitHub Actions automation
+- **Hosting:** GitHub Pages with custom domain
+- **APIs:** DexScreener, Bags.fm, CoinGecko
 
-Your dashboard will be available at:
-- Custom domain: `https://vibefunded.xyz`
-- GitHub Pages: `https://vishalsachdev.github.io/oss-memecoin-ftw/`
+## Key Insights
 
-## How It Works
+- **Bags.fm enables OSS creators** to launch memecoins with built-in royalty mechanisms
+- **Trading volume directly translates** to creator funding via royalties
+- **This model disrupts traditional grant/VC funding** for open source
+- **Network effects drive sustainable, perpetual revenue** for maintainers
+- **"Vibe-coded" projects** combine AI tools with community-driven funding
 
-1. **GitHub Actions** runs `scripts/fetch_data.py` every 30 minutes
-2. The script fetches data from DexScreener and Bags.fm APIs
-3. Data is saved to `public/data.json` and committed automatically
-4. **GitHub Pages** serves the static `public/index.html` which loads the JSON
+---
 
-## File Structure
-
-```
-├── .github/
-│   └── workflows/
-│       └── update-data.yml    # Automation workflow
-├── public/
-│   ├── index.html             # Static dashboard
-│   ├── CNAME                  # Custom domain configuration
-│   └── data.json              # Auto-generated data (created by workflow)
-├── scripts/
-│   └── fetch_data.py          # Data fetching script
-└── README.md
-```
-
-## Customization
-
-### Adding New Tokens
-
-Edit the `TOKENS` dictionary in `scripts/fetch_data.py`:
-
-```python
-TOKENS = {
-    "YOUR_TOKEN": {
-        "name": "Token Name",
-        "creator": "Creator Name",
-        "social": "https://x.com/handle",
-        "social_handle": "@handle",
-        "project_url": "https://github.com/...",
-        "bags_url": "https://bags.fm/...",
-        "token_mint": "...",
-        "description": "...",
-        "pair_address": "..."  # Optional: specific DEX pair
-    }
-}
-```
-
-### Changing Update Frequency
-
-Edit `.github/workflows/update-data.yml` and change the cron schedule:
-- `*/30 * * * *` = every 30 minutes
-- `0 * * * *` = every hour
-- `0 */6 * * *` = every 6 hours
-
-## Troubleshooting
-
-### Data not updating?
-- Check the **Actions** tab for failed workflow runs
-- Verify your `BAGS_API_KEY` secret is set correctly
-
-### Page not loading?
-- Ensure GitHub Pages is enabled and pointing to `/public`
-- Wait a few minutes for deployment to propagate
-
-### Missing earnings data?
-- The `BAGS_API_KEY` secret might not be set
-- Check the workflow logs for API errors
+**Note:** This dashboard serves as a case study examining disruptive funding models in open source software and AI development. DYOR - crypto is volatile.
