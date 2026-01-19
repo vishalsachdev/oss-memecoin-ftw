@@ -790,8 +790,8 @@
                         </td>
                         <td>${t.earnings_usd > 0 ? formatNumber(t.earnings_usd) : 'N/A'}</td>
                         <td>${t.github_stars > 0 ? t.github_stars.toLocaleString() : 'N/A'}</td>
+                        <td>${t.twitter_followers > 0 ? `${t.twitter_followers.toLocaleString()}${!t.twitter_official ? ' <span style="font-size:0.7rem;color:var(--text-secondary);" title="Unofficial source">(unofficial)</span>' : ''}` : 'N/A'}</td>
                         <td>${t.pair_age}</td>
-                        ${t.twitter_followers > 0 ? `<td>${t.twitter_followers.toLocaleString()}${!t.twitter_official ? ' <span style="font-size:0.7rem;color:var(--text-secondary);" title="Unofficial source">(unofficial)</span>' : ''}</td>` : '<td>N/A</td>'}
                         <td>${formatPrice(t.price)}</td>
                         <td>${formatNumber(t.fdv)}</td>
                         <td>${formatNumber(t.volume_24h)}</td>
