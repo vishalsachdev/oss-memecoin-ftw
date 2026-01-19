@@ -8,6 +8,7 @@ on:
       - 'index.html'
       - 'data.json'
       - 'CNAME'
+      - 'favicon.svg'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
