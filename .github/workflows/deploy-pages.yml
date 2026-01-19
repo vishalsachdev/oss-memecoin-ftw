@@ -5,7 +5,9 @@ on:
     branches:
       - main
     paths:
-      - 'public/**'
+      - 'index.html'
+      - 'data.json'
+      - 'CNAME'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
@@ -35,7 +37,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
-          exclude: '.git, .github, scripts, archive, .gitignore, README.md, SETUP.md'
+          exclude: '.git/**\n.github/**\nscripts/**\narchive/**\n.gitignore\nREADME.md\nSETUP.md\npublic/**'
       
       - name: Deploy to GitHub Pages
         id: deployment
