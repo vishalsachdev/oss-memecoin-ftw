@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Fetches token data, GitHub stats, Reddit/HN mentions, and Twitter info
 import os
 import json
 import requests
