@@ -41,6 +41,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add public/data.json
+          cp public/data.json data.json
+          git add public/data.json data.json
           git diff --staged --quiet || git commit -m "Update token data - $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
           git push
