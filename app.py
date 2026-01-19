@@ -37,7 +37,8 @@ TOKENS = {
         "project_url": "https://ralphcoin.org/",
         "bags_url": "https://bags.fm/CxWPdDBqxVo3fnTMRTvNuSrd4gkp78udSrFvkVDBAGS",
         "token_mint": "CxWPdDBqxVo3fnTMRTvNuSrd4gkp78udSrFvkVDBAGS",
-        "description": "Autonomous AI coding loops; royalties support open AI research and esoteric experiments."
+        "description": "Autonomous AI coding loops; royalties support open AI research and esoteric experiments.",
+        "pair_address": "DbyK8gEiXwNeh2zFW2Lo1svUQ1WkHAeQyNDsRaKQ6BHf"
     },
     "GSD": {
         "name": "Get Shit Done",
