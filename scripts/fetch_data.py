@@ -2,7 +2,8 @@
 import os
 import json
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
+import re
 
 BAGS_API_KEY = os.environ.get("BAGS_API_KEY", "")
 
@@ -128,30 +129,161 @@ def fetch_github_stats(project_url):
         if not parts:
             return None
         
-        # GitHub API for public repos (no auth needed, but rate limited to 60/hour)
-        url = f"https://api.github.com/repos/{parts}"
         headers = {
             "Accept": "application/vnd.github.v3+json",
             "User-Agent": "VibeFunded-Dashboard"
         }
+        
+        # Fetch repo stats
+        url = f"https://api.github.com/repos/{parts}"
+        response = requests.get(url, headers=headers, timeout=10)
+        
+        if response.status_code != 200:
+            return None
+        
+        data = response.json()
+        repo_stats = {
+            "stars": data.get("stargazers_count", 0),
+            "forks": data.get("forks_count", 0),
+            "watchers": data.get("watchers_count", 0),
+            "open_issues": data.get("open_issues_count", 0),
+            "language": data.get("language", "N/A"),
+            "created_at": data.get("created_at", ""),
+            "updated_at": data.get("updated_at", ""),
+            "description": data.get("description", "")
+        }
+        
+        # Fetch contributors count
+        try:
+            contributors_url = f"https://api.github.com/repos/{parts}/contributors?per_page=1&anon=true"
+            contrib_response = requests.get(contributors_url, headers=headers, timeout=10)
+            if contrib_response.status_code == 200:
+                # Get total from Link header if available, otherwise count
+                link_header = contrib_response.headers.get("Link", "")
+                if "rel=\"last\"" in link_header:
+                    # Extract page number from last link
+                    import re
+                    match = re.search(r'page=(\d+)>; rel="last"', link_header)
+                    if match:
+                        repo_stats["contributors"] = int(match.group(1)) * 30  # Approximate
+                    else:
+                        repo_stats["contributors"] = len(contrib_response.json())
+                else:
+                    repo_stats["contributors"] = len(contrib_response.json())
+            else:
+                repo_stats["contributors"] = 0
+        except:
+            repo_stats["contributors"] = 0
+        
+        # Fetch recent commit activity (last 30 days)
+        try:
+            commits_url = f"https://api.github.com/repos/{parts}/commits?per_page=1&since={(datetime.now() - timedelta(days=30)).isoformat()}"
+            commits_response = requests.get(commits_url, headers=headers, timeout=10)
+            if commits_response.status_code == 200:
+                link_header = commits_response.headers.get("Link", "")
+                if "rel=\"last\"" in link_header:
+                    import re
+                    match = re.search(r'page=(\d+)>; rel="last"', link_header)
+                    if match:
+                        repo_stats["recent_commits"] = int(match.group(1)) * 30
+                    else:
+                        repo_stats["recent_commits"] = len(commits_response.json())
+                else:
+                    repo_stats["recent_commits"] = len(commits_response.json())
+            else:
+                repo_stats["recent_commits"] = 0
+        except:
+            repo_stats["recent_commits"] = 0
+        
+        # Fetch open PRs count
+        try:
+            prs_url = f"https://api.github.com/repos/{parts}/pulls?state=open&per_page=1"
+            prs_response = requests.get(prs_url, headers=headers, timeout=10)
+            if prs_response.status_code == 200:
+                link_header = prs_response.headers.get("Link", "")
+                if "rel=\"last\"" in link_header:
+                    import re
+                    match = re.search(r'page=(\d+)>; rel="last"', link_header)
+                    if match:
+                        repo_stats["open_prs"] = int(match.group(1)) * 30
+                    else:
+                        repo_stats["open_prs"] = len(prs_response.json())
+                else:
+                    repo_stats["open_prs"] = len(prs_response.json())
+            else:
+                repo_stats["open_prs"] = 0
+        except:
+            repo_stats["open_prs"] = 0
+        
+        return repo_stats
+    except Exception as e:
+        print(f"  Error fetching GitHub stats: {e}")
+        return None
+
+def fetch_reddit_mentions(project_name, ticker):
+    """Search Reddit for mentions of the project"""
+    try:
+        # Search Reddit API (no auth needed)
+        query = f"{project_name} {ticker}"
+        url = f"https://www.reddit.com/search.json?q={query}&limit=10&sort=relevance"
+        headers = {"User-Agent": "VibeFunded-Dashboard/1.0"}
         response = requests.get(url, headers=headers, timeout=10)
         
         if response.status_code == 200:
             data = response.json()
-            return {
-                "stars": data.get("stargazers_count", 0),
-                "forks": data.get("forks_count", 0),
-                "watchers": data.get("watchers_count", 0),
-                "open_issues": data.get("open_issues_count", 0),
-                "language": data.get("language", "N/A"),
-                "created_at": data.get("created_at", ""),
-                "updated_at": data.get("updated_at", ""),
-                "description": data.get("description", "")
-            }
-        return None
+            posts = data.get("data", {}).get("children", [])
+            return len(posts)
+        return 0
     except Exception as e:
-        print(f"  Error fetching GitHub stats: {e}")
-        return None
+        print(f"  Error fetching Reddit mentions: {e}")
+        return 0
+
+def fetch_hn_mentions(project_name, ticker):
+    """Search Hacker News for mentions using Algolia API"""
+    try:
+        query = f"{project_name} {ticker}"
+        url = "https://hn.algolia.com/api/v1/search"
+        params = {
+            "query": query,
+            "tags": "story",
+            "hitsPerPage": 10
+        }
+        response = requests.get(url, params=params, timeout=10)
+        
+        if response.status_code == 200:
+            data = response.json()
+            return data.get("nbHits", 0)
+        return 0
+    except Exception as e:
+        print(f"  Error fetching HN mentions: {e}")
+        return 0
+
+def fetch_twitter_followers(social_url, social_handle, project_name, ticker, dexscreener_url):
+    """Try to get Twitter followers - check creator profile first, then DexScreener"""
+    # Twitter API v2 requires authentication, so we can't easily fetch follower counts
+    # For now, we'll mark the source and note if it's from creator profile (official) or DexScreener (unofficial)
+    # In the future, this could be enhanced with Twitter API integration
+    
+    result = {
+        "followers": 0,
+        "source": "none",
+        "official": False
+    }
+    
+    # If we have a social URL from the creator profile, mark it as official
+    if social_url and ("twitter.com" in social_url or "x.com" in social_url):
+        result["source"] = "creator_profile"
+        result["official"] = True
+        # Note: Follower count would need Twitter API to fetch
+        # For now, we'll leave it at 0 and mark it as needing manual entry or API integration
+    
+    # If we have DexScreener URL, we could try to scrape it, but that's complex
+    # For now, we'll just note that DexScreener might have Twitter links
+    if dexscreener_url and result["source"] == "none":
+        result["source"] = "dexscreener"
+        result["official"] = False
+    
+    return result
 
 def calculate_pair_age(pair_created_at):
     if not pair_created_at:
@@ -193,6 +325,17 @@ def main():
         # Fetch GitHub stats
         github_stats = fetch_github_stats(info.get("project_url", ""))
         
+        # Fetch social metrics
+        reddit_mentions = fetch_reddit_mentions(info.get("name", ""), ticker)
+        hn_mentions = fetch_hn_mentions(info.get("name", ""), ticker)
+        twitter_data = fetch_twitter_followers(
+            info.get("social", ""),
+            info.get("social_handle", ""),
+            info.get("name", ""),
+            ticker,
+            pair.get("url", "") if pair else ""
+        )
+        
         if pair:
             price_changes = pair.get("priceChange", {})
             token_data.append({
@@ -221,7 +364,16 @@ def main():
                 "github_stars": github_stats.get("stars", 0) if github_stats else 0,
                 "github_forks": github_stats.get("forks", 0) if github_stats else 0,
                 "github_watchers": github_stats.get("watchers", 0) if github_stats else 0,
-                "github_language": github_stats.get("language", "N/A") if github_stats else "N/A"
+                "github_language": github_stats.get("language", "N/A") if github_stats else "N/A",
+                "github_contributors": github_stats.get("contributors", 0) if github_stats else 0,
+                "github_recent_commits": github_stats.get("recent_commits", 0) if github_stats else 0,
+                "github_open_issues": github_stats.get("open_issues", 0) if github_stats else 0,
+                "github_open_prs": github_stats.get("open_prs", 0) if github_stats else 0,
+                "reddit_mentions": reddit_mentions,
+                "hn_mentions": hn_mentions,
+                "twitter_followers": twitter_data.get("followers", 0),
+                "twitter_source": twitter_data.get("source", "none"),
+                "twitter_official": twitter_data.get("official", False)
             })
         else:
             token_data.append({
@@ -250,7 +402,16 @@ def main():
                 "github_stars": github_stats.get("stars", 0) if github_stats else 0,
                 "github_forks": github_stats.get("forks", 0) if github_stats else 0,
                 "github_watchers": github_stats.get("watchers", 0) if github_stats else 0,
-                "github_language": github_stats.get("language", "N/A") if github_stats else "N/A"
+                "github_language": github_stats.get("language", "N/A") if github_stats else "N/A",
+                "github_contributors": github_stats.get("contributors", 0) if github_stats else 0,
+                "github_recent_commits": github_stats.get("recent_commits", 0) if github_stats else 0,
+                "github_open_issues": github_stats.get("open_issues", 0) if github_stats else 0,
+                "github_open_prs": github_stats.get("open_prs", 0) if github_stats else 0,
+                "reddit_mentions": reddit_mentions,
+                "hn_mentions": hn_mentions,
+                "twitter_followers": twitter_data.get("followers", 0),
+                "twitter_source": twitter_data.get("source", "none"),
+                "twitter_official": twitter_data.get("official", False)
             })
     
     active_tokens = [t for t in token_data if t["active"]]

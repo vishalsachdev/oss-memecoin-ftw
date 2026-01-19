@@ -619,6 +619,7 @@
                     <th>Links</th>
                     <th onclick="sortTable('earnings_usd')" title="Total lifetime earnings from royalties">Earnings<span class="sort-indicator">↕</span></th>
                     <th onclick="sortTable('github_stars')" title="GitHub repository stars">⭐ Stars<span class="sort-indicator">↕</span></th>
+                    <th onclick="sortTable('twitter_followers')" title="Twitter/X followers">🐦 Followers<span class="sort-indicator">↕</span></th>
                     <th onclick="sortTable('pair_age')" title="Time since trading pair was created on DEX">Pair Age<span class="sort-indicator">↕</span></th>
                     <th onclick="sortTable('price')" title="Current token price in USD">Price<span class="sort-indicator">↕</span></th>
                     <th onclick="sortTable('fdv')" title="Fully Diluted Valuation / Market Cap">FDV/MC<span class="sort-indicator">↕</span></th>
@@ -768,7 +769,7 @@
             const tbody = document.getElementById('token-body');
             
             if (tokens.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="15" class="loading">No token data available.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="16" class="loading">No token data available.</td></tr>';
                 return;
             }
             
@@ -790,6 +791,7 @@
                         <td>${t.earnings_usd > 0 ? formatNumber(t.earnings_usd) : 'N/A'}</td>
                         <td>${t.github_stars > 0 ? t.github_stars.toLocaleString() : 'N/A'}</td>
                         <td>${t.pair_age}</td>
+                        ${t.twitter_followers > 0 ? `<td>${t.twitter_followers.toLocaleString()}${!t.twitter_official ? ' <span style="font-size:0.7rem;color:var(--text-secondary);" title="Unofficial source">(unofficial)</span>' : ''}</td>` : '<td>N/A</td>'}
                         <td>${formatPrice(t.price)}</td>
                         <td>${formatNumber(t.fdv)}</td>
                         <td>${formatNumber(t.volume_24h)}</td>
@@ -852,10 +854,34 @@
                     <div class="value">⭐ ${t.github_stars.toLocaleString()}</div>
                     <div style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">
                         🍴 ${t.github_forks.toLocaleString()} forks
-                        ${t.github_watchers > 0 ? ` • 👀 ${t.github_watchers.toLocaleString()} watchers` : ''}
+                        ${t.github_contributors > 0 ? ` • 👥 ${t.github_contributors} contributors` : ''}
+                        ${t.github_recent_commits > 0 ? ` • 📝 ${t.github_recent_commits} commits (30d)` : ''}
+                        ${t.github_open_issues > 0 ? ` • 🐛 ${t.github_open_issues} issues` : ''}
+                        ${t.github_open_prs > 0 ? ` • 🔀 ${t.github_open_prs} PRs` : ''}
                     </div>
                 </div>
             `).join('');
+            
+            // Add Reddit and HN mentions
+            const allTokens = tokenData.filter(t => t.reddit_mentions > 0 || t.hn_mentions > 0);
+            if (allTokens.length > 0) {
+                statsContainer.innerHTML += `
+                    <div style="grid-column: 1 / -1; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+                        <h4 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1rem;">Community Mentions</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            ${allTokens.map(t => `
+                                <div class="github-stat-card">
+                                    <div class="label">${t.name}</div>
+                                    <div style="margin-top: 8px; font-size: 0.85rem; color: var(--text-secondary);">
+                                        ${t.reddit_mentions > 0 ? `🔴 Reddit: ${t.reddit_mentions} mentions` : ''}
+                                        ${t.hn_mentions > 0 ? `<br>🟠 HN: ${t.hn_mentions} mentions` : ''}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
         }
 
         loadData();
