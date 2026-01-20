@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(vercel-react-best-practices)",
+      "Skill(vercel-react-best-practices:*)",
+      "mcp__filesystem__directory_tree",
+      "Bash(curl:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(git checkout:*)",
+      "Bash(git rebase:*)",
+      "Skill(wrap-up-session)",
+      "Skill(wrap-up-session:*)",
+      "Bash(unison:*)"
+    ]
+  }
+}
