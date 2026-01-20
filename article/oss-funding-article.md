@@ -44,13 +44,13 @@ What's missing is a mechanism that converts community belief directly into creat
 
 While open source maintainers struggled, an adjacent corner of the internet was moving billions of dollars daily through an entirely different mechanism: memecoin speculation.
 
-In January 2024, Solana-based launchpad [Pump.fun democratized token creation](https://www.coindesk.com/business/2024/10/03/how-pumpfun-became-solanas-biggest-memecoin-factory/). Anyone could launch a coin in minutes—no code required—and watch it trade on bonding curves that created instant liquidity. By early 2025, [third-party tracking](https://defillama.com/fees/pump-fun) put Pump.fun's cumulative fees in the hundreds of millions of dollars. Most tokens were jokes, pump-and-dump schemes, or celebrity cash-grabs that flamed out within hours.
+In January 2024, Solana-based launchpad [Pump.fun democratized token creation](https://en.wikipedia.org/wiki/Pump.fun). Anyone could launch a coin in minutes—no code required—and watch it trade on bonding curves that created instant liquidity. By early 2025, the platform had [generated over $700 million in cumulative revenue](https://www.21shares.com/en-us/research/pump-fun-101-the-meme-coin-platform-powering-solana). Most tokens were jokes, pump-and-dump schemes, or celebrity cash-grabs that flamed out within hours.
 
 The pattern was clear: speculation generates enormous capital flows, but the value rarely persists. Traders chase momentum. Creators launch tokens, take profits, and disappear. The infrastructure works beautifully; the incentives point nowhere useful.
 
 But what if the incentives could be redirected?
 
-[Bags.fm introduced a modification](https://thedefiant.io/news/defi/bags-fm-launches-memecoin-factory-with-royalties-for-creators) to the memecoin launchpad formula: **perpetual creator royalties**. Tokens can be created and attributed to a creator's verified account, and the creator can claim a cut of trading activity via a [linked wallet](https://docs.bags.fm/linked-wallets)—continuously, not just at launch. Every trade, every speculation, every pump and dump sends a cut back to the creator.
+[Bags.fm introduced a modification](https://www.dlnews.com/articles/defi/pump-fun-rival-bags-secures-1bn-user-trading-volume/) to the memecoin launchpad formula: **perpetual creator royalties**. Tokens can be created and attributed to a creator's verified account, and the creator can claim a cut of trading activity via their [linked social media account](https://alphamemeradar.com/featured/how-to-launch-a-memecoin-on-bags-solana)—continuously, not just at launch. Every trade, every speculation, every pump and dump sends a cut back to the creator.
 
 The implications were profound. Suddenly, a creator's interests aligned with long-term trading activity rather than launch-day extraction. A project that maintained community interest—through continued development, engagement, or simple cultural relevance—would generate ongoing income. Speculation became patronage.
 
