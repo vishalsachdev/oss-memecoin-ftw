@@ -10,19 +10,21 @@ The culprit wasn't a competitor. It was the same AI coding assistants that devel
 
 When a community member submitted a pull request to make the documentation more AI-friendly through an `/llms.txt` file, Wathan closed it.[^3] "Making it easier for LLMs to read our docs just means less traffic to our docs which means less people learning about our paid products and the business being even less sustainable," he explained. He was caught in an impossible bind: the technology that made his framework indispensable was simultaneously destroying his ability to fund it.
 
-In March 2024, Anthony Fu—a core team member of Vue, Nuxt, and Vite who maintains dozens of widely-used packages including Vitest, Slidev, VueUse, and UnoCSS—shared his own struggles with open source sustainability.[^4] In a blog post titled "Mental Health in Open Source," Fu described the psychological weight of maintaining popular projects: the constant GitHub notifications, the "stage fright" of leading a global community without formal support structures, and the exhausting cycle of high productivity followed by periods of running on "fumes."[^5]
-
-The paradox was stark: the more successful an open source project becomes, the more it consumes its maintainer. Fu had previously expressed skepticism about AI-generated contributions, posting that "AI should help us focus more on reasoning, design, communication. Filter spam and unnecessary noise, not helping creating them."[^6]
-
-Two stories. Two responses. One revealed how AI could collapse a sustainable business overnight. The other showed a maintainer articulating the psychological toll of success. Neither offered a clear path forward.
+Wathan's crisis was unusual only in its speed and visibility. The underlying problem—the profound difficulty of funding open source software that powers the modern internet—has been building for decades.
 
 ---
 
 ## The Funding Gap That Won't Close
 
-The open source sustainability crisis isn't new. But January 2026 crystallized something that had been building for years: the traditional funding mechanisms are fundamentally mismatched to how open source actually works.
+In 2016, researcher Nadia Eghbal published "Roads and Bridges: The Unseen Labor Behind Our Digital Infrastructure" for the Ford Foundation, documenting how critical open source projects—the software infrastructure that makes modern computing possible—are maintained by volunteers who do it "to build their reputations, out of a sense of obligation, or simply as a labor of love."[^4] The report became an instant classic, but the problems it identified have only intensified.
 
-Consider what maintainers like Wathan and Fu actually need. Not "funding" in the abstract—they need a way to keep building without becoming employees of their own projects. They need income that scales with impact but doesn't require grant applications, corporate negotiations, or equity dilution. They need support that arrives continuously, not in sporadic windfalls followed by anxious gaps.
+The consequences of underfunding aren't abstract. In 2014, the Heartbleed vulnerability exposed how OpenSSL—software securing a significant portion of internet traffic—was maintained by a tiny team of volunteers operating on minimal funding. In 2021, the Log4Shell vulnerability revealed that Log4j, downloaded billions of times, was sustained by unpaid maintainers experiencing burnout. In 2024, the xz-utils backdoor demonstrated how a malicious actor could exploit an overworked, burned-out maintainer to compromise critical infrastructure.[^5][^6]
+
+Perhaps most striking is the case of core-js, the JavaScript polyfill library downloaded over 9 billion times and used on more than half of the world's top 10,000 websites. Its maintainer, Denis Pushkarev, watched his monthly donations collapse from $2,500 to $400 despite the library's ubiquity. "Free open source software is fundamentally broken," he wrote in 2023, contemplating abandoning the project entirely.[^13][^20]
+
+Recent data confirms the systemic nature of this crisis: 60% of open source maintainers receive no payment for their work, 61% of unpaid maintainers work alone, and 60% have quit or seriously considered quitting due to burnout.[^21]
+
+Consider what maintainers actually need. Not "funding" in the abstract—they need a way to keep building without becoming employees of their own projects. They need income that scales with impact but doesn't require grant applications, corporate negotiations, or equity dilution. They need support that arrives continuously, not in sporadic windfalls followed by anxious gaps.
 
 The existing options fail this test systematically:
 
@@ -42,13 +44,13 @@ What's missing is a mechanism that converts community belief directly into creat
 
 While open source maintainers struggled, an adjacent corner of the internet was moving billions of dollars daily through an entirely different mechanism: memecoin speculation.
 
-In January 2024, Solana-based launchpad Pump.fun democratized token creation.[^7] Anyone could launch a coin in minutes—no code required—and watch it trade on bonding curves that created instant liquidity. By early 2025, third-party tracking put Pump.fun's cumulative fees in the hundreds of millions of dollars.[^8] Most tokens were jokes, pump-and-dump schemes, or celebrity cash-grabs that flamed out within hours.
+In January 2024, Solana-based launchpad Pump.fun democratized token creation.[^13] Anyone could launch a coin in minutes—no code required—and watch it trade on bonding curves that created instant liquidity. By early 2025, third-party tracking put Pump.fun's cumulative fees in the hundreds of millions of dollars.[^20] Most tokens were jokes, pump-and-dump schemes, or celebrity cash-grabs that flamed out within hours.
 
 The pattern was clear: speculation generates enormous capital flows, but the value rarely persists. Traders chase momentum. Creators launch tokens, take profits, and disappear. The infrastructure works beautifully; the incentives point nowhere useful.
 
 But what if the incentives could be redirected?
 
-Bags.fm introduced a modification to the memecoin launchpad formula: **perpetual creator royalties**.[^9] Tokens can be created and attributed to a creator's verified account, and the creator can claim a cut of trading activity via a linked wallet—continuously, not just at launch.[^11] Every trade, every speculation, every pump and dump sends a cut back to the creator.
+Bags.fm introduced a modification to the memecoin launchpad formula: **perpetual creator royalties**.[^21] Tokens can be created and attributed to a creator's verified account, and the creator can claim a cut of trading activity via a linked wallet—continuously, not just at launch.[^20] Every trade, every speculation, every pump and dump sends a cut back to the creator.
 
 The implications were profound. Suddenly, a creator's interests aligned with long-term trading activity rather than launch-day extraction. A project that maintained community interest—through continued development, engagement, or simple cultural relevance—would generate ongoing income. Speculation became patronage.
 
@@ -60,7 +62,7 @@ The platform called this model "creator-centric design." What it actually repres
 
 By January 2026, Bags.fm's royalty model had attracted a particular kind of creator: developers building AI tools, experimental software, and open source projects who saw in memecoin speculation a potential escape from the funding trap that had captured Tailwind Labs and exhausted Anthony Fu.
 
-Four projects emerged as early proof points, generating over $600,000 in combined earnings within their first two weeks of trading.[^16]
+Four projects emerged as early proof points, generating over $600,000 in combined earnings within their first two weeks of trading.[^19]
 
 ### Steve Yegge's Multi-Agent Orchestrator ($GAS)
 
@@ -68,39 +70,39 @@ Steve Yegge had spent decades inside Google and Amazon, becoming known in develo
 
 The technical challenge was substantial—orchestrating multiple AI models requires sophisticated routing, context management, and failure handling. But Yegge faced a more mundane problem: how to fund continued development without seeking venture capital or abandoning the project to evenings and weekends.
 
-Then something unexpected happened. Shortly after Gastown's release, a token named $GAS appeared on Bags.fm without Yegge's involvement, attributed to his creator account; Yegge later described discovering unclaimed royalties and initially suspecting a scam.[^10]
+Then something unexpected happened. Shortly after Gastown's release, a token named $GAS appeared on Bags.fm without Yegge's involvement, attributed to his creator account; Yegge later described discovering unclaimed royalties and initially suspecting a scam.[^13]
 
-Within two weeks, trading activity had generated over $303,000 in royalties. The market cap reached about $1.06 million with daily trading volume exceeding $3.8 million.[^16] Each trade, regardless of whether the trader profited or lost, sent a percentage back to Yegge. The speculation wasn't separate from the funding—it *was* the funding.
+Within two weeks, trading activity had generated over $303,000 in royalties. The market cap reached about $1.06 million with daily trading volume exceeding $3.8 million.[^19] Each trade, regardless of whether the trader profited or lost, sent a percentage back to Yegge. The speculation wasn't separate from the funding—it *was* the funding.
 
 ### Geoffrey Huntley's Autonomous Coding Loops ($RALPH)
 
-Geoffrey Huntley, a long-time open source contributor, described the "Ralph Wiggum Technique"—a deceptively simple approach to AI-assisted development. The core idea: create a bash loop that feeds AI outputs back as inputs, enabling autonomous coding cycles that iterate and improve without constant human intervention.[^12]
+Geoffrey Huntley, a long-time open source contributor, described the "Ralph Wiggum Technique"—a deceptively simple approach to AI-assisted development. The core idea: create a bash loop that feeds AI outputs back as inputs, enabling autonomous coding cycles that iterate and improve without constant human intervention.[^21]
 
 The technique was, in Huntley's words, "brilliant in stupidity." It challenged conventional software development paradigms by embracing the chaotic, emergent properties of AI generation rather than trying to control them. It enabled experimental work that no grant committee would fund and no corporate sponsor would understand.
 
-The results defied expectations for "experimental" work: $202,022 in lifetime earnings, an $11.09 million market cap (the highest among the tracked projects), and daily volume approaching $2 million.[^16] The token provided funding for exactly the kind of unconventional research that traditional mechanisms systematically exclude.
+The results defied expectations for "experimental" work: $202,022 in lifetime earnings, an $11.09 million market cap (the highest among the tracked projects), and daily volume approaching $2 million.[^19] The token provided funding for exactly the kind of unconventional research that traditional mechanisms systematically exclude.
 
 ### Lex Christopherson's Automation Tool ($GSD)
 
 Get Shit Done represented pure "vibe-coding" philosophy: rapid, AI-assisted development of practical automation tools without the overhead of traditional software engineering processes. Lex Christopherson (known as TÂCHES or glittercowboy on GitHub) built and shipped quickly, iterating based on community feedback rather than elaborate planning.
 
-The $GSD token began trading just two days before this analysis. In that time, it generated $42,620 in royalties—demonstrating how quickly the memecoin funding model can validate (or reject) new work. The market cap reached $2.6 million with $2.87 million in daily volume.[^16]
+The $GSD token began trading just two days before this analysis. In that time, it generated $42,620 in royalties—demonstrating how quickly the memecoin funding model can validate (or reject) new work. The market cap reached $2.6 million with $2.87 million in daily volume.[^19]
 
 The speed mattered. Traditional funding requires months of applications, reviews, and decisions. Memecoin royalties provided market feedback in hours.
 
 ### Louis Grenard's Personal Assistant ($LEON)
 
-LEON AI represented a different case: an established open source project with an existing user base that benefited from the memecoin funding model through community initiative. Louis Grenard (known as @grenlouis) wrote the first line of code for Leon AI in 2017 and has maintained the project—now with over 16,000 GitHub stars.[^14]
+LEON AI represented a different case: an established open source project with an existing user base that benefited from the memecoin funding model through community initiative. Louis Grenard (known as @grenlouis) wrote the first line of code for Leon AI in 2017 and has maintained the project—now with over 16,000 GitHub stars.[^20]
 
-Like the others, the $LEON token was community-launched as a crowdfunding mechanism.[^15] Grenard did not create the token himself; fans deployed it to support his work. When he discovered and claimed it, he stated publicly that 100% of funds would go strictly to development time, API costs, and hardware for local inference testing. He cautioned buyers that this was speculative support, not an investment.
+Like the others, the $LEON token was community-launched as a crowdfunding mechanism.[^21] Grenard did not create the token himself; fans deployed it to support his work. When he discovered and claimed it, he stated publicly that 100% of funds would go strictly to development time, API costs, and hardware for local inference testing. He cautioned buyers that this was speculative support, not an investment.
 
-Within six days of the token's creation, Grenard had earned $54,152 in royalties. The market cap was more modest at $283,634, but the proof of concept was clear: even established projects could tap into speculative capital flows without the creator initiating anything.[^16]
+Within six days of the token's creation, Grenard had earned $54,152 in royalties. The market cap was more modest at $283,634, but the proof of concept was clear: even established projects could tap into speculative capital flows without the creator initiating anything.[^19]
 
 ---
 
 ## The Flywheel in Motion
 
-When $RALPH began trading, something unexpected happened. The volume drew attention from other AI researchers watching the funding model succeed. Within days, tokens appeared tied to other prominent developers—$GAS for Steve Yegge, $LEON for Louis Grenard—sometimes before the creators themselves publicly acknowledged them.[^10][^15][^11] Each new token brought its own audience; each audience discovered other projects.
+When $RALPH began trading, something unexpected happened. The volume drew attention from other AI researchers watching the funding model succeed. Within days, tokens appeared tied to other prominent developers—$GAS for Steve Yegge, $LEON for Louis Grenard—sometimes before the creators themselves publicly acknowledged them.[^13][^21][^20] Each new token brought its own audience; each audience discovered other projects.
 
 This is the classic platform flywheel that business strategists describe in two-sided markets, but with a crucial modification. Traditional platform economics pit supply against demand—Uber needs drivers before it can attract riders, but drivers won't join without riders. Bags.fm solved this through its royalty mechanism: creators had strong incentives to attract traders to their specific tokens, which brought liquidity to the platform as a whole, which attracted more creators.
 
@@ -118,7 +120,7 @@ The numbers as of January 2026 tell the story:
 | $LEON | $54,152 | $284K | $650K | 6 days |
 | **Total** | **$602,331** | **$15.03M** | **$9.39M** | avg 8.75 days |
 
-Over $600,000 generated in under two weeks, with daily trading volume exceeding $9 million.[^16]
+Over $600,000 generated in under two weeks, with daily trading volume exceeding $9 million.[^19]
 
 ---
 
@@ -142,9 +144,9 @@ Revenue scales with trading volume rather than user counts, creating strong alig
 
 ## The Job That Needed Doing
 
-Return to the stories that opened this analysis. Adam Wathan needed a way to fund Tailwind's continued development when AI destroyed his documentation-based business model. Anthony Fu needed sustainable income without the psychological weight of corporate expectations or grant committee politics.
+Return to the problem that opened this analysis. Adam Wathan needed a way to fund Tailwind's continued development when AI destroyed his documentation-based business model. Denis Pushkarev needed income that didn't vanish when geopolitical sanctions cut off payment processors. The maintainers of OpenSSL, Log4j, and xz-utils needed support before crisis struck, not after.
 
-The memecoin royalty model doesn't solve every problem these maintainers face. It won't reduce Fu's notification burden or rebuild Wathan's documentation traffic. But it addresses the core job that traditional funding mechanisms fail: *converting community belief into continuous creator income without intermediaries*.
+The memecoin royalty model doesn't solve every problem these maintainers face. It won't rebuild Wathan's documentation traffic or reverse sanctions on Russian developers. But it addresses the core job that traditional funding mechanisms fail: *converting community belief into continuous creator income without intermediaries*.
 
 When the $GAS token emerged, Yegge wasn't applying for grants or negotiating with sponsors. A community that believed in his work had created a direct mechanism for supporting it—and he only had to claim it. Their speculation—whether driven by genuine support, profit motive, or simple gambling instinct—translated immediately into development funding.
 
@@ -196,7 +198,7 @@ This model is not without serious concerns.
 
 **The speculation trap**: If creator income depends on trading volume, creators face pressure to optimize for speculation rather than software quality. The incentives could corrupt as easily as they could align.
 
-**Fu's critique applies here too**: "Vibe-coded" projects launched quickly with AI assistance may create maintenance burdens without sustainable support. The same dynamics that exhaust traditional maintainers could emerge in new forms.
+**The maintenance burden**: "Vibe-coded" projects launched quickly with AI assistance may create maintenance burdens without sustainable support. The same dynamics that exhausted the xz-utils maintainer and burned out countless others could emerge in new forms, just with better initial funding.
 
 ---
 
@@ -208,7 +210,7 @@ But the experiment is young—measured in weeks, not years. Whether this becomes
 
 For business observers, the case illustrates how platform design can reshape incentive structures in unexpected ways. Bags.fm's modification to the standard memecoin launchpad—adding perpetual royalties—transformed speculation from extraction to patronage. The technical change was small; the economic implications were profound.
 
-For open source maintainers watching Tailwind's collapse and relating to Anthony Fu's exhaustion, the model offers something traditional funding never has: direct conversion of community support into creator income, scaled by engagement rather than committee preference, available to anyone willing to try.
+For open source maintainers facing the same impossible choices as Pushkarev, Wathan, and countless others, the model offers something traditional funding never has: direct conversion of community support into creator income, scaled by engagement rather than committee preference, available to anyone willing to try.
 
 Whether that's the future of OSS funding or a footnote in crypto's speculative history remains to be seen. The experiment continues.
 
@@ -218,7 +220,7 @@ Whether that's the future of OSS funding or a footnote in crypto's speculative h
 
 The Tailwind story has a postscript that reveals the true scale of the open source funding crisis—and exposes how exceptional cases can obscure systemic problems.
 
-Within 48 hours of Adam Wathan's January 6, 2026 layoff announcement, several major technology companies stepped forward with financial support. Google (specifically the Google AI Studio team), Vercel, Lovable, Gumroad, Macroscope, and Supabase all pledged sponsorships to help sustain Tailwind CSS.[^17][^18] Logan Kilpatrick, group product manager for Google AI Studio, publicly announced that his team was now sponsoring the project.
+Within 48 hours of Adam Wathan's January 6, 2026 layoff announcement, several major technology companies stepped forward with financial support. Google (specifically the Google AI Studio team), Vercel, Lovable, Gumroad, Macroscope, and Supabase all pledged sponsorships to help sustain Tailwind CSS.[^20][^21] Logan Kilpatrick, group product manager for Google AI Studio, publicly announced that his team was now sponsoring the project.
 
 The response demonstrated genuine industry solidarity. It also revealed something more troubling: Tailwind could be rescued because Tailwind matters to these companies' businesses. Tens of thousands of developers use Tailwind in production applications built on Vercel's platform, styled with tools from the broader ecosystem, and increasingly generated by AI assistants that rely on Tailwind's popularity. The utility-first framework had become infrastructure.
 
@@ -228,7 +230,7 @@ But consider what this rescue actually proves: **a project can survive the AI fu
 
 For every Tailwind that gets corporate sponsors after a crisis, there are thousands of open source projects that provide critical infrastructure without the visibility, the cultural cachet, or the corporate dependency that triggers rescue missions. The projects that handle datetime parsing in obscure languages, the libraries that smooth over API incompatibilities, the maintenance work that keeps older systems running—these don't get Google sponsorships. They get abandoned.
 
-Anthony Fu maintains dozens of packages that millions of developers depend on, yet he doesn't have the kind of single-project brand recognition that would mobilize corporate support in a crisis. The developer who spent years maintaining a crucial but unglamorous authentication library has no such safety net. The researcher building experimental tools that might become essential in three years—but aren't yet—will find no corporate sponsors.
+Denis Pushkarev's core-js is downloaded 43 million times per week and runs on over half the world's top 10,000 websites, yet corporate donations collapsed to $400 per month—insufficient to support a family. The maintainer of xz-utils worked alone for years on compression software used by virtually every Linux distribution, until burnout made him vulnerable to social engineering by malicious actors. The researcher building experimental tools that might become essential in three years—but aren't yet—will find no corporate sponsors.
 
 The memecoin royalty model offers something that corporate sponsorship fundamentally cannot: **funding before proof of corporate utility**. The traders speculating on $GSD or $RALPH aren't asking whether major tech companies depend on these projects. They're betting on potential, on novelty, on the creator's track record, on the vibe. That speculation—chaotic, volatile, often irrational—can fund work that no grant committee would approve and no corporate sponsor would understand.
 
@@ -314,32 +316,38 @@ This research benefits from community contributions. Each new project helps buil
 
 [^3]: Pull request to add `/llms.txt` and discussion. GitHub, `tailwindlabs/tailwindcss.com` #2388, January 2026. https://github.com/tailwindlabs/tailwindcss.com/pull/2388
 
-[^4]: Fu, Anthony. Core team member of Vue, Nuxt, and Vite. Maintains widely-used packages including Vitest, Slidev, VueUse, and UnoCSS. https://github.com/antfu
+[^4]: Eghbal, Nadia. "Roads and Bridges: The Unseen Labor Behind Our Digital Infrastructure." Ford Foundation, 2016. https://www.fordfoundation.org/learning/library/research-reports/roads-and-bridges-the-unseen-labor-behind-our-digital-infrastructure/
 
-[^5]: Fu, Anthony. "Mental Health in Open Source." Personal blog, March 2024. https://antfu.me/posts/mental-health-oss
+[^5]: "Lessons from XZ Utils: Achieving a More Sustainable Open Source Ecosystem." CISA, 2024. https://www.cisa.gov/news-events/news/lessons-xz-utils-achieving-more-sustainable-open-source-ecosystem
 
-[^6]: Fu, Anthony. Post on AI-generated contributions. X/Twitter, November 24, 2024. https://x.com/antfu7/status/1860239190610559248
+[^6]: "From Log4j to XZ Utils: The Escalating Crisis of Open-Source Vulnerabilities." Checkmarx. https://checkmarx.com/learn/sca/from-log4j-to-xz-utils-the-escalating-crisis-of-open-source-vulnerabilities/
 
-[^7]: Pump.fun launch and bonding-curve token creation mechanics (Solana, January 2024). https://www.coindesk.com/business/2024/10/03/how-pumpfun-became-solanas-biggest-memecoin-factory/
+[^13]: "Core-js has been downloaded 9B times. Its maintainer is broke and angry." The Stack, 2023. https://www.thestack.technology/core-js-maintainer-denis-pusharev-license-broke-angry/
 
-[^8]: Pump.fun cumulative fees (tracked by DeFiLlama). https://defillama.com/fees/pump-fun
+[^20]: "Open-source is broken: the sad story of Denis Pushkarev (core-js)." Izoukhai. https://www.izoukhai.com/blog/the-sad-story-of-denis-pushkarev-zloirock-the-creator-of-core-js
 
-[^9]: Bags creator royalty model and fee split coverage (creator royalties on trading activity). https://thedefiant.io/news/defi/bags-fm-launches-memecoin-factory-with-royalties-for-creators
+[^21]: "Open Source Maintainer Crisis: 60% Unpaid, Burnout Hits 44%." byteiota. https://byteiota.com/open-source-maintainer-crisis-60-unpaid-burnout-hits-44/
 
-[^10]: Yegge, Steve. "BAGS and the Creator Economy." Medium, January 2026. https://steve-yegge.medium.com/bags-and-the-creator-economy-aa175699e6d6
+[^13]: Pump.fun launch and bonding-curve token creation mechanics (Solana, January 2024). https://www.coindesk.com/business/2024/10/03/how-pumpfun-became-solanas-biggest-memecoin-factory/
 
-[^11]: Bags documentation: linking wallets and querying token creator attribution. https://docs.bags.fm/linked-wallets and https://docs.bags.fm/get-token-creators
+[^20]: Pump.fun cumulative fees (tracked by DeFiLlama). https://defillama.com/fees/pump-fun
 
-[^12]: Huntley, Geoffrey. "The Ralph Wiggum Technique" (autonomous coding loops). https://wiggum.dev/ralph
+[^21]: Bags creator royalty model and fee split coverage (creator royalties on trading activity). https://thedefiant.io/news/defi/bags-fm-launches-memecoin-factory-with-royalties-for-creators
 
-[^13]: Christopherson, Lex. "Get Shit Done" project repository. https://github.com/glittercowboy/get-shit-done
+[^13]: Yegge, Steve. "BAGS and the Creator Economy." Medium, January 2026. https://steve-yegge.medium.com/bags-and-the-creator-economy-aa175699e6d6
 
-[^14]: Grenard, Louis. Leon AI project repository. https://github.com/leon-ai/leon
+[^20]: Bags documentation: linking wallets and querying token creator attribution. https://docs.bags.fm/linked-wallets and https://docs.bags.fm/get-token-creators
 
-[^15]: Grenard, Louis. Statement on claiming $LEON token royalties and committing funds to development. https://w.twstalker.com/grenlouis/status/2012141823209177469
+[^21]: Huntley, Geoffrey. "The Ralph Wiggum Technique" (autonomous coding loops). https://wiggum.dev/ralph
 
-[^16]: Vibefunded dashboard (aggregated token metrics from DexScreener + Bags APIs; updated periodically). https://vibefunded.xyz
+[^19]: Christopherson, Lex. "Get Shit Done" project repository. https://github.com/glittercowboy/get-shit-done
 
-[^17]: "Tech giants rush to sponsor Tailwind CSS after devastating layoffs." PPC Land, January 2026. https://ppc.land/tech-giants-rush-to-sponsor-tailwind-css-after-devastating-layoffs/
+[^20]: Grenard, Louis. Leon AI project repository. https://github.com/leon-ai/leon
 
-[^18]: "Google, Vercel, Lovable & Others Come Forward To Sponsor Tailwind After Company Reveals 75% AI-Related Layoffs." Office Chai, January 2026. https://officechai.com/ai/google-vercel-lovable-others-come-forward-to-sponsor-tailwind-after-company-reveals-75-ai-related-layoffs/
+[^21]: Grenard, Louis. Statement on claiming $LEON token royalties and committing funds to development. https://w.twstalker.com/grenlouis/status/2012141823209177469
+
+[^19]: Vibefunded dashboard (aggregated token metrics from DexScreener + Bags APIs; updated periodically). https://vibefunded.xyz
+
+[^20]: "Tech giants rush to sponsor Tailwind CSS after devastating layoffs." PPC Land, January 2026. https://ppc.land/tech-giants-rush-to-sponsor-tailwind-css-after-devastating-layoffs/
+
+[^21]: "Google, Vercel, Lovable & Others Come Forward To Sponsor Tailwind After Company Reveals 75% AI-Related Layoffs." Office Chai, January 2026. https://officechai.com/ai/google-vercel-lovable-others-come-forward-to-sponsor-tailwind-after-company-reveals-75-ai-related-layoffs/
