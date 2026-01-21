@@ -130,5 +130,6 @@ The script runs via GitHub Actions on a schedule. Twitter followers should be up
 
 | Date | Changes |
 |------|---------|
+| 2026-01-21 | Added total SOL earnings metric to clarify USD fluctuation from SOL price changes; created `/add-token` skill for adding new tokens to dashboard |
 | 2026-01-20 | Redesigned dashboard UI: removed Social Popularity bar chart, added Project Activity & Community table, removed duplicate stars/followers from financial table, fixed LEON creator name in About section |
 | 2026-01-19 | Added $RALPH and $LEON GitHub stats, Twitter followers for all tokens, historical data tracking |
