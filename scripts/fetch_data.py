@@ -442,16 +442,18 @@ def main():
     active_tokens = [t for t in token_data if t["active"]]
     total_mcap = sum(t["fdv"] for t in active_tokens)
     total_volume = sum(t["volume_24h"] for t in active_tokens)
-    total_earnings = sum(t["earnings_usd"] for t in token_data)
+    total_earnings_sol = sum(t["earnings"] for t in token_data)
+    total_earnings_usd = sum(t["earnings_usd"] for t in token_data)
     avg_change = sum(t["change_24h"] for t in active_tokens) / len(active_tokens) if active_tokens else 0
-    
+
     output = {
         "updated_at": datetime.now().isoformat(),
         "sol_price": sol_price,
         "summary": {
             "total_mcap": total_mcap,
             "total_volume": total_volume,
-            "total_earnings": total_earnings,
+            "total_earnings_sol": total_earnings_sol,
+            "total_earnings_usd": total_earnings_usd,
             "avg_change_24h": avg_change,
             "active_tokens": len([t for t in active_tokens if t["volume_24h"] > 1000])
         },
@@ -484,7 +486,7 @@ def main():
     print(f"Historical snapshot saved to {history_file}")
     print(f"Total tokens: {len(token_data)}")
     print(f"Active tokens: {len(active_tokens)}")
-    print(f"Total earnings: ${total_earnings:,.0f}")
+    print(f"Total earnings: {total_earnings_sol:,.2f} SOL (${total_earnings_usd:,.0f})")
 
 if __name__ == "__main__":
     main()

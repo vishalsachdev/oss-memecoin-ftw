@@ -642,8 +642,11 @@
 
     <div id="total-earnings-header" class="total-earnings-header">
         <div class="label">Total Earnings from Royalties</div>
-        <div class="value">Loading...</div>
-        <div class="refresh-note">Data refreshes automatically every 30 minutes</div>
+        <div class="value" id="earnings-usd">Loading...</div>
+        <div class="sol-earnings" id="earnings-sol" style="font-size: 1rem; color: var(--text-secondary); margin-top: 8px;"></div>
+        <div class="refresh-note" style="margin-top: 12px; font-size: 0.75rem; color: var(--text-muted); opacity: 0.9;">
+            USD value fluctuates with SOL price. Data refreshes every 30 minutes.
+        </div>
     </div>
 
     <div class="table-container">
@@ -701,6 +704,7 @@
 
     <script>
         let tokenData = [];
+        let summaryData = {};
         let currentSort = { field: 'earnings_usd', asc: false };
 
         function formatNumber(value, prefix = '$', decimals = 2) {
@@ -739,10 +743,12 @@
             try {
                 const response = await fetch('data.json?' + Date.now());
                 const data = await response.json();
-                
+
                 document.getElementById('last-updated').textContent = `Updated: ${formatDate(data.updated_at)}`;
                 document.getElementById('sol-price').textContent = `SOL: $${data.sol_price.toFixed(2)}`;
-                
+
+                summaryData = data.summary;
+                summaryData.sol_price = data.sol_price;
                 renderSummary(data.summary);
                 tokenData = data.tokens;
                 renderGitHubChart();
@@ -755,6 +761,10 @@
         }
 
         function renderSummary(summary) {
+            // Support both old (total_earnings) and new (total_earnings_usd) field names
+            const totalEarningsUsd = summary.total_earnings_usd || summary.total_earnings || 0;
+            const totalEarningsSol = summary.total_earnings_sol || 0;
+
             document.getElementById('summary').innerHTML = `
                 <div class="summary-card">
                     <div class="label">Total Market Cap</div>
@@ -765,8 +775,8 @@
                     <div class="value">${formatNumber(summary.total_volume)}</div>
                 </div>
                 <div class="summary-card">
-                    <div class="label">Total Earnings</div>
-                    <div class="value">${formatNumber(summary.total_earnings)}</div>
+                    <div class="label">Total Earnings (SOL)</div>
+                    <div class="value">${totalEarningsSol > 0 ? formatNumber(totalEarningsSol, '', 0) + ' SOL' : 'N/A'}</div>
                 </div>
                 <div class="summary-card">
                     <div class="label">Active Tokens (Vol > $1K)</div>
@@ -777,6 +787,12 @@
                     <div class="value ${getChangeClass(summary.avg_change_24h)}">${formatChange(summary.avg_change_24h)}</div>
                 </div>
             `;
+
+            // Update total earnings header with both USD and SOL
+            document.getElementById('earnings-usd').textContent = formatNumber(totalEarningsUsd);
+            if (totalEarningsSol > 0) {
+                document.getElementById('earnings-sol').textContent = `${formatNumber(totalEarningsSol, '', 0)} SOL @ $${summary.sol_price?.toFixed(2) || summaryData.sol_price?.toFixed(2) || '?'}/SOL`;
+            }
         }
 
         function sortTable(field) {
@@ -825,43 +841,35 @@
 
         function renderTable(tokens) {
             const tbody = document.getElementById('token-body');
-            
+
             if (tokens.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="16" class="loading">No token data available.</td></tr>';
                 return;
             }
-            
-            let totalEarnings = 0;
-            
-            tbody.innerHTML = tokens.map(t => {
-                totalEarnings += t.earnings_usd || 0;
-                return `
-                    <tr>
-                        <td class="ticker">${t.ticker}</td>
-                        <td>${t.earnings_usd > 0 ? formatNumber(t.earnings_usd) : 'N/A'}</td>
-                        <td>${t.name}</td>
-                        <td>${t.creator}</td>
-                        <td class="link-cell">
-                            ${t.project_url ? `<a href="${t.project_url}" target="_blank">Project</a>` : ''}
-                            ${t.social ? `<a href="${t.social}" target="_blank">Social</a>` : ''}
-                            ${t.bags_url ? `<a href="${t.bags_url}" target="_blank">Bags</a>` : ''}
-                            ${t.url ? `<a href="${t.url}" target="_blank">DEX</a>` : ''}
-                        </td>
-                        <td>${t.pair_age}</td>
-                        <td>${formatPrice(t.price)}</td>
-                        <td>${formatNumber(t.fdv)}</td>
-                        <td>${formatNumber(t.volume_24h)}</td>
-                        <td>${formatNumber(t.liquidity)}</td>
-                        <td class="${getChangeClass(t.change_5m)}">${formatChange(t.change_5m)}</td>
-                        <td class="${getChangeClass(t.change_1h)}">${formatChange(t.change_1h)}</td>
-                        <td class="${getChangeClass(t.change_6h)}">${formatChange(t.change_6h)}</td>
-                        <td class="${getChangeClass(t.change_24h)}">${formatChange(t.change_24h)}</td>
-                    </tr>
-                `;
-            }).join('');
-            
-            // Update total earnings header
-            document.getElementById('total-earnings-header').querySelector('.value').textContent = formatNumber(totalEarnings);
+
+            tbody.innerHTML = tokens.map(t => `
+                <tr>
+                    <td class="ticker">${t.ticker}</td>
+                    <td>${t.earnings_usd > 0 ? formatNumber(t.earnings_usd) : 'N/A'}</td>
+                    <td>${t.name}</td>
+                    <td>${t.creator}</td>
+                    <td class="link-cell">
+                        ${t.project_url ? `<a href="${t.project_url}" target="_blank">Project</a>` : ''}
+                        ${t.social ? `<a href="${t.social}" target="_blank">Social</a>` : ''}
+                        ${t.bags_url ? `<a href="${t.bags_url}" target="_blank">Bags</a>` : ''}
+                        ${t.url ? `<a href="${t.url}" target="_blank">DEX</a>` : ''}
+                    </td>
+                    <td>${t.pair_age}</td>
+                    <td>${formatPrice(t.price)}</td>
+                    <td>${formatNumber(t.fdv)}</td>
+                    <td>${formatNumber(t.volume_24h)}</td>
+                    <td>${formatNumber(t.liquidity)}</td>
+                    <td class="${getChangeClass(t.change_5m)}">${formatChange(t.change_5m)}</td>
+                    <td class="${getChangeClass(t.change_1h)}">${formatChange(t.change_1h)}</td>
+                    <td class="${getChangeClass(t.change_6h)}">${formatChange(t.change_6h)}</td>
+                    <td class="${getChangeClass(t.change_24h)}">${formatChange(t.change_24h)}</td>
+                </tr>
+            `).join('');
         }
 
         function toggleAbout() {
