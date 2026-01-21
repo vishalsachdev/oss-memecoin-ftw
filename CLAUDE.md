@@ -36,6 +36,8 @@ The script auto-fetches most data, but these fields require manual updates:
 
 ### 2. New Token Additions
 
+Use `/add-token` skill to add new tokens. It handles all steps: updating the script, verification, and documentation.
+
 New tokens are submitted via GitHub Issues using the template at `.github/ISSUE_TEMPLATE/submit-project.yml`.
 
 **Required fields from submission:**
